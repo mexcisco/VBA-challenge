@@ -1,0 +1,61 @@
+Sub StockLoop()
+    
+    Dim ticker As String
+    
+    Dim yrChg As Integer
+    Dim outputRow As Integer
+    Dim volCounter As Integer
+    
+    For i = 2 To LastRow
+    
+        volCounter = volCounter + ws.Cells(i, 7).Value
+        
+        If Cells(i, 2).Value = "20200102" Then
+        
+            openPrice = Cells(i, 3).Value
+        
+        End If
+        
+        If Cells(i, 2).Value = "20201231" Then
+        
+            closePrice = Cells(i, 6).Value
+            
+            yrChg = closePrice - openPrice
+            
+            ticker = Cells(i, l).Value
+            
+            Cells(outputRow, 9).Value = ticker
+            
+            Cells(outputRow, 10).Value = yrChg
+            
+            perChg = yearlyChg / openPrice
+            perChg = FormatPercent(perChg)
+            
+            ' insert percent change into output table
+            Cells(perChg, 11).Value = perChg
+        
+            'insert volCounter into output table
+            Cells(perChg, 12).Value = volCounter
+        
+            'set colCounter = to 0
+            volCounter = 0
+    
+            outputRow = outputRow + 1
+            
+        End If
+    
+Next i
+
+        
+    
+        
+
+
+
+
+
+        
+        
+    
+End Sub
+
